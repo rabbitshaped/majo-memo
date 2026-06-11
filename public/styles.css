@@ -432,7 +432,7 @@ li {
 	position: absolute;
 
 	top: 26px;
-	right: 80px;
+	right: 50px;
 
 	/* opacity: 0.6; */
 
@@ -492,15 +492,15 @@ li {
 }
 
 .memo-pad {
-	background: #efdcf3;
+	background: #fdf6f5;
 }
 
 .reminder-card {
-	background: #f096d9;
+	background: #efdcf3;
 }
 
 .ideas-card {
-	background: #ebe9a8;
+	background: #fff8fd;
 }
 
 footer {
@@ -560,7 +560,9 @@ footer p {
 	font-style: normal;
 }
 
-.memo-title {
+.memo-title,
+.idea-title,
+.reminder-title {
 	width: 100%;
 
 	border: none;
@@ -574,7 +576,9 @@ footer p {
 	color: #a388ec;
 }
 
-.memo-content {
+.memo-content,
+.idea-content,
+.reminder-content {
 	width: 100%;
 
 	border: none;

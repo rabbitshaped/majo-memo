@@ -5,7 +5,6 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
-
 import NotesGrid from "./NotesGrid";
 import TodoNote from "./TodoNote";
 import MemoPad from "./MemoPad";
@@ -84,10 +83,11 @@ function App() {
 								case "todo":
 									return (
 										<TodoNote
-											key={index}
-											id={index}
+											key={note.id}
+											id={note.id}
 											title={note.title}
 											content={note.content}
+											onUpdate={updateNote}
 											onDelete={deleteNote}
 										/>
 									);
@@ -95,10 +95,11 @@ function App() {
 								case "reminder":
 									return (
 										<ReminderCard
-											key={index}
-											id={index}
+											key={note.id}
+											id={note.id}
 											title={note.title}
 											content={note.content}
+											onUpdate={updateNote}
 											onDelete={deleteNote}
 										/>
 									);
@@ -106,10 +107,11 @@ function App() {
 								case "idea":
 									return (
 										<IdeaCard
-											key={index}
-											id={index}
+											key={note.id}
+											id={note.id}
 											title={note.title}
 											content={note.content}
+											onUpdate={updateNote}
 											onDelete={deleteNote}
 										/>
 									);
