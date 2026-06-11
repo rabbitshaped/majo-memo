@@ -3,7 +3,7 @@ import React from "react";
 function TodoNote() {
 	return (
 		<div className="memo todo-note">
-			<span className="memo-corner">🌙</span>
+			{/* <span className="memo-corner">🌙</span> */}
 
 			<h2>Today's Tasks</h2>
 

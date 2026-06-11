@@ -3,7 +3,8 @@ import React from "react";
 function IdeaCard() {
 	return (
 		<div className="memo ideas-card">
-			<span className="memo-corner">🔮</span>
+			<img src="/images/witch-hat.png" className="memo-corner" alt="" />
+			{/* <span className="memo-corner">🔮</span> */}
 
 			<h2>Ideas</h2>
 

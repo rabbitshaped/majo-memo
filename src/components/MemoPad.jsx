@@ -23,7 +23,8 @@ function MemoPad(props) {
 				}
 			}}
 		>
-			<span className="memo-corner">🌸</span>
+			{/* <span className="memo-corner">🌸</span> */}
+			<img src="/images/faint-moon.png" className="memo-corner" alt="" />
 
 			{editing ? (
 				<>
@@ -65,6 +66,7 @@ function MemoPad(props) {
 
 			<BrushCleaning
 				className="clean"
+				size={30}
 				onClick={() => props.onDelete(props.id)}
 			/>
 		</div>

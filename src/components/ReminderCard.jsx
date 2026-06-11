@@ -3,7 +3,8 @@ import React from "react";
 function ReminderCard() {
 	return (
 		<div className="memo reminder-card">
-			<span className="memo-corner">✨</span>
+			<img src="/images/ringing-bell.png" className="reminder-corner" alt="" />
+			{/* <span className="memo-corner">✨</span> */}
 
 			<h2>Reminder</h2>
 

@@ -285,6 +285,29 @@ li {
 
 .clean {
 	color: #8865cb;
+	cursor: pointer;
+
+	position: absolute;
+	justify-content: right;
+	bottom: 16px;
+	right: 16px;
+
+	border: none;
+	background: transparent;
+
+	cursor: pointer;
+
+	color: var(--muted);
+
+	transition: 0.2s;
+}
+
+.memo .clean {
+	opacity: 0.4;
+}
+
+.memo:hover .clean {
+	opacity: 1;
 }
 
 /* .notes-grid {
@@ -323,14 +346,13 @@ li {
 	font-family: "Caveat Brush", cursive;
 	color: #a388ec;
 	font-size: 2rem;
-	margin-bottom: 1rem;
+	margin-bottom: 1.3rem;
 }
 
 .memo p,
 .memo li {
 	font-family: "Coming Soon";
 	line-height: 1.6;
-	margin-top: 0.5rem;
 }
 
 /* Washi tape */
@@ -397,10 +419,22 @@ li {
 .memo-corner {
 	position: absolute;
 
-	top: 16px;
-	right: 16px;
-
+	top: 12px;
+	right: 12px;
+	/* width: 32px;
+	height: 32px; */
 	opacity: 0.6;
+
+	font-size: 1rem;
+}
+
+.reminder-corner {
+	position: absolute;
+
+	top: 26px;
+	right: 80px;
+
+	/* opacity: 0.6; */
 
 	font-size: 1rem;
 }
@@ -454,19 +488,19 @@ li {
 }
 
 .todo-note {
-	background: #ffffff;
+	background: #a2e7b1;
 }
 
 .memo-pad {
-	background: #fcf7ff;
+	background: #efdcf3;
 }
 
 .reminder-card {
-	background: #f7f1ff;
+	background: #f096d9;
 }
 
 .ideas-card {
-	background: #fff8fd;
+	background: #ebe9a8;
 }
 
 footer {
@@ -536,7 +570,7 @@ footer p {
 
 	font-family: "Caveat Brush", cursive;
 	font-size: 2rem;
-
+	margin-bottom: 1.3rem;
 	color: #a388ec;
 }
 
@@ -552,6 +586,6 @@ footer p {
 
 	font-family: "Coming Soon", cursive;
 	font-size: 1rem;
-
+	min-height: 60px;
 	line-height: 1.6;
 }
