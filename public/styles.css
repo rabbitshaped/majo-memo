@@ -330,13 +330,12 @@ li {
 .memo {
 	position: relative;
 	display: inline-block;
-	background: white;
+	/* background: white; */
 	width: 100%;
 	border-radius: 24px;
 
 	margin-bottom: 24px;
 	padding: 1.5rem;
-
 	border: 1px solid var(--border);
 
 	box-shadow: var(--shadow);
@@ -356,7 +355,7 @@ li {
 }
 
 /* Washi tape */
-.memo::before {
+.memo-pad::before {
 	content: "";
 
 	position: absolute;
@@ -388,9 +387,48 @@ li {
 
 .todo-note {
 	position: relative;
+	padding-top: 48px;
+	content: "";
+	border: none;
+
+	background-image: url("/images/todobg.png");
+	background-size: cover;
+	background-size: 100% auto;
+	background-position: center -2px;
+	background-repeat: no-repeat;
+	min-height: 300px;
+	border-radius: 8px;
+}
+
+/* .todo-note {
+	position: relative;
+
+	background: transparent;
+	padding-top: 70px;
+	border: none;
+	margin-top: 30px;
 }
 
 .todo-note::before {
+	content: "";
+
+	position: absolute;
+
+	top: -18px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-image: url("/images/todobg.png");
+
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	min-height: 300px;
+
+	z-index: -1;
+} */
+
+/* .todo-note::before {
 	content: "";
 
 	position: absolute;
@@ -404,7 +442,7 @@ li {
 	opacity: 0.15;
 
 	pointer-events: none;
-}
+} */
 
 .checkbox {
 	width: 24px;
@@ -438,6 +476,28 @@ li {
 
 	font-size: 1rem;
 }
+
+.reminder-card::before {
+	content: "";
+
+	position: absolute;
+
+	top: -40px;
+	left: 50%;
+
+	width: 70px;
+	height: 70px;
+
+	transform: translateX(-50%);
+
+	background-image: url("/images/purple-clip.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+/* .reminder-card::after {
+	display: none;
+} */
 
 .search-container {
 	position: relative;
@@ -487,20 +547,25 @@ li {
 	text-decoration: line-through;
 }
 
-.todo-note {
-	background: #a2e7b1;
-}
-
 .memo-pad {
 	background: #fdf6f5;
 }
 
 .reminder-card {
 	background: #efdcf3;
+	margin-top: 32px;
+	padding-top: 40px;
 }
 
 .ideas-card {
-	background: #fff8fd;
+	/* background: #fff8fd; */
+	background-color: #fcf9ff;
+
+	background-image:
+		linear-gradient(rgba(180, 160, 240, 0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(180, 160, 240, 0.1) 1px, transparent 1px);
+
+	background-size: 24px 24px;
 }
 
 footer {
@@ -562,7 +627,8 @@ footer p {
 
 .memo-title,
 .idea-title,
-.reminder-title {
+.reminder-title,
+.todo-title {
 	width: 100%;
 
 	border: none;
@@ -578,7 +644,8 @@ footer p {
 
 .memo-content,
 .idea-content,
-.reminder-content {
+.reminder-content,
+.todo-content {
 	width: 100%;
 
 	border: none;

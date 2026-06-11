@@ -23,7 +23,8 @@ function IdeaCard(props) {
 				}
 			}}
 		>
-			<img src="/images/witch-hat.png" className="memo-corner" alt="" />
+			{/* <img src="/images/witch-hat.png" className="memo-corner" alt="" /> */}
+			{/* <img src="/images/sparkle.png" className="memo-corner" alt="" /> */}
 			{/* <span className="memo-corner">🔮</span> */}
 
 			{editing ? (
