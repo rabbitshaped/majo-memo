@@ -1,0 +1,557 @@
+/* * {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+html {
+	font-family: "Montserrat", sans-serif;
+}
+body {
+	background: #eee;
+
+	padding: 0 16px;
+}
+
+header {
+	background-color: #f5ba13;
+	margin: auto -16px;
+	padding: 16px 32px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+	color: #fff;
+	font-family: "McLaren", cursive;
+	font-weight: 200;
+}
+
+footer {
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+}
+
+footer p {
+	color: #ccc;
+}
+.note {
+	background: #fff;
+	border-radius: 7px;
+	box-shadow: 0 2px 5px #ccc;
+	padding: 10px;
+	width: 240px;
+	margin: 16px;
+	float: left;
+}
+.note h1 {
+	font-size: 1.1em;
+	margin-bottom: 6px;
+}
+.note p {
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.note button {
+	position: relative;
+	float: right;
+	margin-right: 10px;
+	color: #f5ba13;
+	border: none;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	outline: none;
+	background-color: transparent;
+}
+
+form.create-note {
+	position: relative;
+	width: 480px;
+	margin: 30px auto 20px auto;
+	background: #fff;
+	padding: 15px;
+	border-radius: 7px;
+	box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+form.create-note input,
+form.create-note textarea {
+	width: 100%;
+	border: none;
+	padding: 4px;
+	outline: none;
+	font-size: 1.2em;
+	font-family: inherit;
+	resize: none;
+}
+form.create-note button {
+	position: absolute;
+	right: 18px;
+	bottom: -18px;
+	background: #f5ba13;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	outline: none;
+} */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+}
+
+:root {
+	--bg: #e1cff4;
+	--surface: #ffffff;
+	--surface-alt: #f1e9ff;
+
+	--primary: #9b7fe8;
+	--primary-light: #c9b6ff;
+
+	--text: #4a3d68;
+	--muted: #8d83a8;
+
+	--border: #e2d8f7;
+
+	--shadow: 0 8px 30px rgba(155, 127, 232, 0.08);
+}
+
+.app {
+	display: flex;
+	min-height: 100vh;
+	background: #f6eaf5;
+}
+
+.sidebar {
+	width: 280px;
+	flex-shrink: 0;
+	padding: 3rem;
+
+	border-right: 1px solid var(--border);
+
+	background: #f1e3f6;
+
+	backdrop-filter: blur(20px);
+}
+
+.sidebar-btn {
+	border: none;
+
+	border-radius: 10px;
+
+	color: white;
+	font-family: "Yomogi", cursive;
+	font-size: 16px;
+	font-weight: 700;
+
+	transition: 0.25s;
+
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+
+	padding: 1rem 1.5rem;
+
+	border: none;
+
+	margin-bottom: 1rem;
+	cursor: pointer;
+}
+
+.header {
+	/* flex: 1;
+
+	display: flex;
+	flex-direction: column;
+
+	padding: 2rem;
+
+	overflow-y: auto; */
+	display: flex;
+	/* height: 80px; */
+	/* flex-shrink: 0; */
+	justify-content: space-between;
+
+	align-items: center;
+
+	/* padding: 1.5rem 2rem; */
+
+	/* border-bottom: 1px solid var(--border); */
+
+	/* backdrop-filter: blur(10px); */
+}
+
+.header-left {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 50px;
+	gap: 0.25rem;
+	color: #bda1e6;
+}
+
+.header-right {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.header-decoration {
+	width: 140px;
+	height: auto;
+	margin-right: 30px;
+	flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+	.header-decoration {
+		display: none;
+	}
+}
+
+.header h1 {
+	font-family: "Caveat Brush", cursive;
+	font-size: 50px;
+}
+
+.header p {
+	font-family: "Caveat Brush", cursive;
+	font-size: 20px;
+}
+
+.search-container {
+	width: 320px;
+}
+
+.search-container input {
+	font-family: "Yomogi", cursive;
+	font-size: 18px;
+}
+
+.content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.main-content {
+	flex: 1;
+	/* display: inline-flex; */
+	display: flex;
+	flex-direction: column;
+	/* padding: 2rem; */
+	overflow-y: auto;
+}
+
+.memo-btn {
+	background: #8865cb;
+}
+
+.todo-btn {
+	background: #e5d3f4;
+}
+
+.reminder-btn {
+	background: #e5d3f4;
+}
+
+.idea-btn {
+	background: #e5d3f4;
+}
+
+.new:hover {
+	transform: translateY(-2px);
+}
+
+li {
+	list-style: none;
+}
+
+.clean {
+	color: #8865cb;
+}
+
+/* .notes-grid {
+	display: flex; */
+
+/* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+
+/* gap: 24px;
+
+	padding: 2rem;
+} */
+
+.notes-grid {
+	column-count: 4;
+	column-gap: 32px;
+	padding: 0rem 3rem;
+	padding-top: 10px;
+}
+
+.memo {
+	position: relative;
+	display: inline-block;
+	background: white;
+	width: 100%;
+	border-radius: 24px;
+
+	margin-bottom: 24px;
+	padding: 1.5rem;
+
+	border: 1px solid var(--border);
+
+	box-shadow: var(--shadow);
+}
+
+.memo h2 {
+	font-family: "Caveat Brush", cursive;
+	color: #a388ec;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.memo p,
+.memo li {
+	font-family: "Coming Soon";
+	line-height: 1.6;
+	margin-top: 0.5rem;
+}
+
+/* Washi tape */
+.memo::before {
+	content: "";
+
+	position: absolute;
+
+	top: -8px;
+	left: 50%;
+
+	width: 90px;
+	height: 22px;
+
+	transform: translateX(-50%) rotate(-2deg);
+
+	background: rgba(200, 180, 255, 0.4);
+
+	border-radius: 6px;
+}
+
+/* .todo-item {
+	display: flex;
+
+	align-items: center;
+
+	gap: 12px;
+
+	padding: 12px 0;
+
+	border-bottom: 1px dashed var(--border);
+} */
+
+.todo-note {
+	position: relative;
+}
+
+.todo-note::before {
+	content: "";
+
+	position: absolute;
+	inset: 0;
+
+	background-image: url("./images/todobg.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	opacity: 0.15;
+
+	pointer-events: none;
+}
+
+.checkbox {
+	width: 24px;
+	height: 24px;
+
+	border-radius: 50%;
+
+	border: 2px solid var(--primary);
+}
+
+/* decorative element */
+.memo-corner {
+	position: absolute;
+
+	top: 16px;
+	right: 16px;
+
+	opacity: 0.6;
+
+	font-size: 1rem;
+}
+
+.search-container {
+	position: relative;
+	margin-bottom: 2rem;
+	/* margin-right: 1rem; */
+}
+
+.search-icon {
+	position: absolute;
+
+	left: 16px;
+	top: 50%;
+
+	transform: translateY(-50%);
+
+	color: #9b7fe8;
+}
+
+.search {
+	width: 300px;
+
+	max-width: 100%;
+
+	border: 1px solid var(--border);
+	padding: 12px 16px 12px 48px;
+	border-radius: 999px;
+
+	/* padding: 1rem 1.5rem; */
+	/* align-self: right; */
+	background: #f6eaf5;
+
+	/* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); */
+}
+
+.memo:hover {
+	transform: translateY(-4px);
+
+	box-shadow: 0 18px 40px rgba(155, 127, 232, 0.12);
+
+	transition: 0.25s;
+}
+
+/* Completed tasks slowly fade */
+.completed {
+	opacity: 0.55;
+
+	text-decoration: line-through;
+}
+
+.todo-note {
+	background: #ffffff;
+}
+
+.memo-pad {
+	background: #fcf7ff;
+}
+
+.reminder-card {
+	background: #f7f1ff;
+}
+
+.ideas-card {
+	background: #fff8fd;
+}
+
+footer {
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 4rem;
+	background-color: #d0b4da;
+}
+
+footer p {
+	color: #f8e9fd;
+	padding-top: 20px;
+	font-family: "Yomogi", cursive;
+}
+
+#hat {
+	margin: 30px 50px;
+}
+
+.caveat-brush-regular {
+	font-family: "Caveat Brush", cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.caveat-regular {
+	font-family: "Caveat", cursive;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.coming-soon-regular {
+	font-family: "Coming Soon", cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.yomogi-regular {
+	font-family: "Yomogi", cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.klee-one-regular {
+	font-family: "Klee One", cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.cause-different {
+	font-family: "Cause", cursive;
+	font-optical-sizing: auto;
+	font-weight: 500;
+	font-style: normal;
+}
+
+.memo-title {
+	width: 100%;
+
+	border: none;
+	outline: none;
+
+	background: transparent;
+
+	font-family: "Caveat Brush", cursive;
+	font-size: 2rem;
+
+	color: #a388ec;
+}
+
+.memo-content {
+	width: 100%;
+
+	border: none;
+	outline: none;
+
+	background: transparent;
+
+	resize: none;
+
+	font-family: "Coming Soon", cursive;
+	font-size: 1rem;
+
+	line-height: 1.6;
+}
