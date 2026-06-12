@@ -6,7 +6,7 @@ function Header() {
 		<header className="header">
 			<div className="header-left">
 				<h1>Majo Memo</h1>
-				<p>Capture ideas, organize thoughts, keep magic.</p>
+				<p>A tidy notebook for chaotic witches.</p>
 			</div>
 			<div className="header-right">
 				<SearchBar />

@@ -36,6 +36,17 @@ function App() {
 			title: "",
 			content: "",
 			tape: type === "memo" ? randomTape : null,
+
+			items:
+				type === "todo"
+					? [
+							{
+								id: crypto.randomUUID(),
+								text: "",
+								completed: false,
+							},
+						]
+					: [],
 		};
 
 		setNotes((prev) => [...prev, newNote]);
@@ -51,6 +62,61 @@ function App() {
 						}
 					: note,
 			),
+		);
+	}
+
+	function updateTodoItem(noteId, itemId, text) {
+		setNotes((prev) =>
+			prev.map((note) => {
+				if (note.id !== noteId) return note;
+
+				return {
+					...note,
+					items: note.items.map((item) =>
+						item.id === itemId ? { ...item, text } : item,
+					),
+				};
+			}),
+		);
+	}
+
+	function toggleTodoItem(noteId, itemId) {
+		setNotes((prev) =>
+			prev.map((note) => {
+				if (note.id !== noteId) return note;
+
+				return {
+					...note,
+					items: note.items.map((item) =>
+						item.id === itemId
+							? {
+									...item,
+									completed: !item.completed,
+								}
+							: item,
+					),
+				};
+			}),
+		);
+	}
+
+	function addTodoItem(noteId) {
+		setNotes((prev) =>
+			prev.map((note) => {
+				if (note.id !== noteId) return note;
+
+				return {
+					...note,
+					items: [
+						...note.items,
+						{
+							id: crypto.randomUUID(),
+							text: "",
+							completed: false,
+						},
+					],
+				};
+			}),
 		);
 	}
 
@@ -72,15 +138,6 @@ function App() {
 				<Header />
 				<MainContent>
 					<NotesGrid className="notes-grid">
-						{/* {notes.map((noteItem, index) => (
-							<Note
-								key={index}
-								id={index}
-								title={noteItem.title}
-								content={noteItem.content}
-								onDelete={deleteNote}
-							/>
-						))} */}
 						{/* <p>Notes count: {notes.length}</p> */}
 						{notes.map((note, index) => {
 							switch (note.type) {
@@ -103,9 +160,12 @@ function App() {
 											key={note.id}
 											id={note.id}
 											title={note.title}
-											content={note.content}
+											items={note.items}
 											onUpdate={updateNote}
 											onDelete={deleteNote}
+											onAddItem={addTodoItem}
+											onUpdateItem={updateTodoItem}
+											onToggleItem={toggleTodoItem}
 										/>
 									);
 
@@ -138,7 +198,6 @@ function App() {
 							}
 						})}
 
-						<TodoNote />
 						<ReminderCard />
 						<IdeaCard />
 					</NotesGrid>

@@ -401,7 +401,7 @@ li {
 	background-size: 100% auto;
 	background-position: center -2px;
 	background-repeat: no-repeat;
-	min-height: 300px;
+	min-height: 200px;
 	border-radius: 8px;
 }
 
@@ -665,4 +665,88 @@ footer p {
 	font-size: 1rem;
 	min-height: 60px;
 	line-height: 1.6;
+}
+
+.todo-checkbox {
+	width: 24px;
+	height: 24px;
+
+	border-radius: 50%;
+	border: 2px solid #9b7fe8;
+
+	background: transparent;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	cursor: pointer;
+
+	flex-shrink: 0;
+}
+
+.todo-checkbox.completed {
+	background: #9b7fe8;
+	color: white;
+}
+
+.add-task {
+	border: none;
+	background: transparent;
+
+	font-family: "Coming Soon", cursive;
+	font-size: 0.9rem;
+
+	color: #b99ef4;
+
+	cursor: pointer;
+
+	margin-top: 8px;
+	padding-left: 36px;
+}
+
+.add-task:hover {
+	color: #9b7fe8;
+}
+
+.completed {
+	opacity: 0.5;
+	text-decoration: line-through;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	margin-bottom: 12px;
+}
+
+.todo-text {
+	font-family: "Coming Soon", cursive;
+	font-size: 1rem;
+	line-height: 1.6;
+
+	cursor: text;
+}
+
+.completed-text {
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+
+.todo-edit {
+	width: 100%;
+
+	border: none;
+	outline: none;
+
+	background: transparent;
+
+	font-family: "Coming Soon", cursive;
+	font-size: 1rem;
+	line-height: 1.6;
+
+	padding: 0;
+	margin: 0;
 }

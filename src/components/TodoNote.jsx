@@ -1,67 +1,40 @@
 import React, { useState } from "react";
 import { BrushCleaning } from "lucide-react";
+import TodoItem from "./TodoItem";
 
 function TodoNote(props) {
-	const [editing, setEditing] = useState(
-		props.title === "" && props.content === "",
-	);
-
-	function handleDelete() {
-		props.onDelete(props.id);
-	}
-
-	function finishEditing() {
-		setEditing(false);
-	}
+	const [editingTitle, setEditingTitle] = useState(props.title === "");
 
 	return (
-		<div
-			className="memo todo-note"
-			onBlur={(e) => {
-				if (!e.currentTarget.contains(e.relatedTarget)) {
-					setEditing(false);
-				}
-			}}
-		>
-			{/* <span className="memo-corner">🌙</span> */}
-
-			{editing ? (
-				<>
-					<input
-						className="todo-title"
-						value={props.title}
-						placeholder="Untitled Todo"
-						onChange={(e) => props.onUpdate(props.id, "title", e.target.value)}
-						onBlur={finishEditing}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								e.preventDefault();
-								finishEditing();
-							}
-						}}
-					/>
-
-					<textarea
-						className="todo-content"
-						value={props.content}
-						placeholder="Write something..."
-						onChange={(e) =>
-							props.onUpdate(props.id, "content", e.target.value)
-						}
-						onBlur={finishEditing}
-					/>
-				</>
+		<div className="memo todo-note">
+			{editingTitle ? (
+				<input
+					className="todo-title"
+					value={props.title}
+					placeholder="Untitled Todo"
+					onChange={(e) => props.onUpdate(props.id, "title", e.target.value)}
+					onBlur={() => setEditingTitle(false)}
+				/>
 			) : (
-				<>
-					<h2 onClick={() => setEditing(true)}>
-						{props.title || "Untitled Todo"}
-					</h2>
-
-					<p onClick={() => setEditing(true)}>
-						{props.content || "Click to edit..."}
-					</p>
-				</>
+				<h2 onClick={() => setEditingTitle(true)}>
+					{props.title || "Untitled Todo"}
+				</h2>
 			)}
+
+			<ul className="todo-list">
+				{props.items?.map((item) => (
+					<TodoItem
+						key={item.id}
+						item={item}
+						onToggle={() => props.onToggleItem(props.id, item.id)}
+						onChange={(text) => props.onUpdateItem(props.id, item.id, text)}
+					/>
+				))}
+			</ul>
+
+			<button className="add-task" onClick={() => props.onAddItem(props.id)}>
+				+ Add another task
+			</button>
 
 			<BrushCleaning
 				className="clean"
