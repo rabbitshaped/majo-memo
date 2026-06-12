@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 // import Note from "./Note";
@@ -12,7 +12,16 @@ import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
 
 function App() {
-	const [notes, setNotes] = useState([]);
+	// const [notes, setNotes] = useState([]);
+	const [notes, setNotes] = useState(() => {
+		const savedNotes = localStorage.getItem("notes");
+
+		return savedNotes ? JSON.parse(savedNotes) : [];
+	});
+
+	useEffect(() => {
+		localStorage.setItem("notes", JSON.stringify(notes));
+	}, [notes]);
 
 	function addNote(type) {
 		const washitapes = [
