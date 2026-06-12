@@ -718,9 +718,18 @@ footer p {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	/* 
+	margin-bottom: 12px; */
 
-	margin-bottom: 12px;
+	padding: 10px 0;
+
+	border-bottom: 1px dashed #d7c3f5;
 }
+
+/* Removes the last line */
+/* .todo-item:last-child {
+	border-bottom: none;
+} */
 
 .todo-text {
 	font-family: "Coming Soon", cursive;

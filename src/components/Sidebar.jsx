@@ -4,8 +4,6 @@ import { Astroid } from "lucide-react";
 import { AlarmClock } from "lucide-react";
 import { Sparkles } from "lucide-react";
 
-import CreateArea from "./CreateArea";
-
 function Sidebar(props) {
 	return (
 		<aside className="sidebar">
@@ -22,7 +20,7 @@ function Sidebar(props) {
 			<button className="sidebar-btn new idea-btn">
 				<Sparkles size={20} /> New Idea
 			</button> */}
-			{/* <CreateArea onAdd={addNote} /> */}
+
 			{/* <nav className="sidebar-nav">
 				<button>📖 All Notes</button>
 				<button>⭐ Favorites</button>

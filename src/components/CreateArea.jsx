@@ -1,87 +1,87 @@
-import React, { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import { Fab } from "@mui/material";
-import { Zoom } from "@mui/material";
+// import React, { useState } from "react";
+// import AddIcon from "@mui/icons-material/Add";
+// import { Fab } from "@mui/material";
+// import { Zoom } from "@mui/material";
 
-function CreateArea(props) {
-	const [isExpanded, setExpanded] = useState(false);
+// function CreateArea(props) {
+// 	const [isExpanded, setExpanded] = useState(false);
 
-	const [note, setNote] = useState({
-		type: "",
-		title: "",
-		content: "",
-	});
+// 	const [note, setNote] = useState({
+// 		type: "",
+// 		title: "",
+// 		content: "",
+// 	});
 
-	notes.map((note) => {
-		switch (note.type) {
-			case "memo":
-				return <MemoCard />;
+// 	notes.map((note) => {
+// 		switch (note.type) {
+// 			case "memo":
+// 				return <MemoCard />;
 
-			case "todo":
-				return <TodoCard />;
+// 			case "todo":
+// 				return <TodoCard />;
 
-			case "reminder":
-				return <ReminderCard />;
+// 			case "reminder":
+// 				return <ReminderCard />;
 
-			case "idea":
-				return <IdeaCard />;
-		}
-	});
+// 			case "idea":
+// 				return <IdeaCard />;
+// 		}
+// 	});
 
-	function handleChange(event) {
-		const { name, value } = event.target;
+// 	function handleChange(event) {
+// 		const { name, value } = event.target;
 
-		setNote((prevNote) => {
-			return {
-				...prevNote,
-				[name]: value,
-			};
-		});
-	}
+// 		setNote((prevNote) => {
+// 			return {
+// 				...prevNote,
+// 				[name]: value,
+// 			};
+// 		});
+// 	}
 
-	function submitNote(event) {
-		props.onAdd(note);
-		setNote({
-			title: "",
-			content: "",
-		});
-		event.preventDefault();
-	}
+// 	function submitNote(event) {
+// 		props.onAdd(note);
+// 		setNote({
+// 			title: "",
+// 			content: "",
+// 		});
+// 		event.preventDefault();
+// 	}
 
-	function expand() {
-		setExpanded(true);
-	}
+// 	function expand() {
+// 		setExpanded(true);
+// 	}
 
-	return (
-		<div>
-			<form className="create-note">
-				{isExpanded && (
-					<input
-						name="title"
-						onChange={handleChange}
-						value={note.title}
-						placeholder="Title"
-					/>
-				)}
+// 	return (
+// 		<div>
+// 			<form className="create-note">
+// 				{isExpanded && (
+// 					<input
+// 						name="title"
+// 						onChange={handleChange}
+// 						value={note.title}
+// 						placeholder="Title"
+// 					/>
+// 				)}
 
-				{isExpanded && (
-					<textarea
-						name="content"
-						onClick={expand}
-						onChange={handleChange}
-						value={note.content}
-						placeholder="Take a note..."
-						rows={isExpanded ? 3 : 1}
-					/>
-				)}
-				<Zoom in={isExpanded}>
-					<Fab className="new-note-btn" onClick={submitNote}>
-						<AddIcon />
-					</Fab>
-				</Zoom>
-			</form>
-		</div>
-	);
-}
+// 				{isExpanded && (
+// 					<textarea
+// 						name="content"
+// 						onClick={expand}
+// 						onChange={handleChange}
+// 						value={note.content}
+// 						placeholder="Take a note..."
+// 						rows={isExpanded ? 3 : 1}
+// 					/>
+// 				)}
+// 				<Zoom in={isExpanded}>
+// 					<Fab className="new-note-btn" onClick={submitNote}>
+// 						<AddIcon />
+// 					</Fab>
+// 				</Zoom>
+// 			</form>
+// 		</div>
+// 	);
+// }
 
-export default CreateArea;
+// export default CreateArea;
