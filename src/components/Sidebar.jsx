@@ -59,7 +59,6 @@ function Sidebar(props) {
 				New Idea
 			</button>
 			<img src="/images/star-line.png" style={{ margin: 30 }} alt="" />
-			{/* Some more buttons */}
 		</aside>
 	);
 }

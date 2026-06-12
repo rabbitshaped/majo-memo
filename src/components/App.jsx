@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-// import Note from "./Note";
-// import CreateArea from "./CreateArea";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import NotesGrid from "./NotesGrid";
@@ -12,7 +10,6 @@ import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
 
 function App() {
-	// const [notes, setNotes] = useState([]);
 	const [notes, setNotes] = useState(() => {
 		const savedNotes = localStorage.getItem("notes");
 
@@ -22,6 +19,35 @@ function App() {
 	useEffect(() => {
 		localStorage.setItem("notes", JSON.stringify(notes));
 	}, [notes]);
+
+	const [searchTerm, setSearchTerm] = useState("");
+
+	const filteredNotes = notes.filter((note) => {
+		const query = searchTerm.toLowerCase();
+
+		if (!query) return true;
+
+		//note types
+		if (note.type?.toLowerCase().includes(query)) {
+			return true;
+		}
+		// search title
+		if (note.title?.toLowerCase().includes(query)) {
+			return true;
+		}
+
+		// search memo/reminder/idea content
+		if (note.content?.toLowerCase().includes(query)) {
+			return true;
+		}
+
+		// search todo items
+		if (note.items?.some((item) => item.text.toLowerCase().includes(query))) {
+			return true;
+		}
+
+		return false;
+	});
 
 	function addNote(type) {
 		const washitapes = [
@@ -129,13 +155,6 @@ function App() {
 		);
 	}
 
-	// function deleteNote(id) {
-	// 	setNotes((prevNotes) => {
-	// 		return prevNotes.filter((noteItem, index) => {
-	// 			return note.id === id;
-	// 		});
-	// 	});
-	// }
 	function deleteNote(id) {
 		setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
 	}
@@ -144,71 +163,74 @@ function App() {
 		<div className="app">
 			<Sidebar onCreate={addNote} />
 			<div className="content">
-				<Header />
+				<Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 				<MainContent>
 					<NotesGrid className="notes-grid">
-						{/* <p>Notes count: {notes.length}</p> */}
-						{notes.map((note, index) => {
-							switch (note.type) {
-								case "memo":
-									return (
-										<MemoPad
-											key={note.id}
-											id={note.id}
-											title={note.title}
-											content={note.content}
-											tape={note.tape}
-											onUpdate={updateNote}
-											onDelete={deleteNote}
-										/>
-									);
+						{filteredNotes.length === 0 ? (
+							<div className="empty-state">
+								<h2>🔮 Nothing in the crystal ball...</h2>
+								<p>No notes match your search.</p>
+							</div>
+						) : (
+							filteredNotes.map((note) => {
+								switch (note.type) {
+									case "memo":
+										return (
+											<MemoPad
+												key={note.id}
+												id={note.id}
+												title={note.title}
+												content={note.content}
+												tape={note.tape}
+												onUpdate={updateNote}
+												onDelete={deleteNote}
+											/>
+										);
 
-								case "todo":
-									return (
-										<TodoNote
-											key={note.id}
-											id={note.id}
-											title={note.title}
-											items={note.items}
-											onUpdate={updateNote}
-											onDelete={deleteNote}
-											onAddItem={addTodoItem}
-											onUpdateItem={updateTodoItem}
-											onToggleItem={toggleTodoItem}
-										/>
-									);
+									case "todo":
+										return (
+											<TodoNote
+												key={note.id}
+												id={note.id}
+												title={note.title}
+												items={note.items}
+												onUpdate={updateNote}
+												onDelete={deleteNote}
+												onAddItem={addTodoItem}
+												onUpdateItem={updateTodoItem}
+												onToggleItem={toggleTodoItem}
+											/>
+										);
 
-								case "reminder":
-									return (
-										<ReminderCard
-											key={note.id}
-											id={note.id}
-											title={note.title}
-											content={note.content}
-											onUpdate={updateNote}
-											onDelete={deleteNote}
-										/>
-									);
+									case "reminder":
+										return (
+											<ReminderCard
+												key={note.id}
+												id={note.id}
+												title={note.title}
+												content={note.content}
+												onUpdate={updateNote}
+												onDelete={deleteNote}
+											/>
+										);
 
-								case "idea":
-									return (
-										<IdeaCard
-											key={note.id}
-											id={note.id}
-											title={note.title}
-											content={note.content}
-											onUpdate={updateNote}
-											onDelete={deleteNote}
-										/>
-									);
+									case "idea":
+										return (
+											<IdeaCard
+												key={note.id}
+												id={note.id}
+												title={note.title}
+												content={note.content}
+												onUpdate={updateNote}
+												onDelete={deleteNote}
+											/>
+										);
 
-								default:
-									return null;
-							}
-						})}
-
-						<ReminderCard />
-						<IdeaCard />
+									default:
+										return null;
+								}
+							})
+						)}
 					</NotesGrid>
 				</MainContent>
 			</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 
-function Header() {
+function Header(props) {
 	return (
 		<header className="header">
 			<div className="header-left">
@@ -9,7 +9,7 @@ function Header() {
 				<p>A tidy notebook for chaotic witches.</p>
 			</div>
 			<div className="header-right">
-				<SearchBar />
+				<SearchBar value={props.searchTerm} onChange={props.setSearchTerm} />
 				<img
 					src="./images/right-corner-moon.png"
 					alt=""
