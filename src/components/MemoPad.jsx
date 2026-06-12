@@ -17,6 +17,9 @@ function MemoPad(props) {
 	return (
 		<div
 			className="memo memo-pad"
+			style={{
+				"--tape-image": `url(${props.tape})`,
+			}}
 			onBlur={(e) => {
 				if (!e.currentTarget.contains(e.relatedTarget)) {
 					setEditing(false);

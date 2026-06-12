@@ -215,7 +215,7 @@ body,
 .header-decoration {
 	width: 140px;
 	height: auto;
-	margin-right: 30px;
+	margin-right: 60px;
 	flex-shrink: 0;
 }
 
@@ -360,16 +360,21 @@ li {
 
 	position: absolute;
 
-	top: -8px;
+	top: -15px;
 	left: 50%;
 
-	width: 90px;
-	height: 22px;
+	width: 100px;
+	height: 32px;
 
 	transform: translateX(-50%) rotate(-2deg);
 
-	background: rgba(200, 180, 255, 0.4);
-
+	background-size: cover;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: var(--tape-image);
+	/* background: rgba(200, 180, 255, 0.4); */
+	opacity: 0.6;
 	border-radius: 6px;
 }
 
@@ -549,6 +554,7 @@ li {
 
 .memo-pad {
 	background: #fdf6f5;
+	margin-top: 10px;
 }
 
 .reminder-card {

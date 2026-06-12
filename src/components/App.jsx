@@ -15,11 +15,27 @@ function App() {
 	const [notes, setNotes] = useState([]);
 
 	function addNote(type) {
+		const washitapes = [
+			"/images/washi-1.png",
+			"/images/washi-2.png",
+			"/images/washi-3.png",
+			"/images/washi-4.png",
+			"/images/washi-5.png",
+			"/images/washi-7.png",
+			"/images/washi-8.png",
+			"/images/washi-9.png",
+			"/images/washi-10.png",
+		];
+
+		const randomTape =
+			washitapes[Math.floor(Math.random() * washitapes.length)];
+
 		const newNote = {
 			id: crypto.randomUUID(),
 			type,
 			title: "",
 			content: "",
+			tape: type === "memo" ? randomTape : null,
 		};
 
 		setNotes((prev) => [...prev, newNote]);
@@ -75,6 +91,7 @@ function App() {
 											id={note.id}
 											title={note.title}
 											content={note.content}
+											tape={note.tape}
 											onUpdate={updateNote}
 											onDelete={deleteNote}
 										/>
