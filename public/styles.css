@@ -759,3 +759,55 @@ footer p {
 	padding: 0;
 	margin: 0;
 }
+
+.empty-state {
+	break-inside: avoid;
+	column-span: all;
+	width: 500px;
+	max-width: 90%;
+
+	margin: 4rem auto;
+
+	padding: 2.5rem;
+
+	background: #fcf7ff;
+	border: 1px solid var(--border);
+	border-radius: 24px;
+
+	box-shadow: var(--shadow);
+
+	text-align: center;
+	position: relative;
+}
+
+.empty-state::before {
+	content: "";
+
+	position: absolute;
+
+	top: -10px;
+	left: 50%;
+
+	width: 90px;
+	height: 22px;
+
+	transform: translateX(-50%) rotate(-2deg);
+
+	background: rgba(200, 180, 255, 0.4);
+
+	border-radius: 6px;
+}
+
+.empty-state h2 {
+	font-family: "Caveat Brush", cursive;
+	font-size: 2.5rem;
+	color: #a388ec;
+
+	margin-bottom: 1rem;
+}
+
+.empty-state p {
+	font-family: "Coming Soon", cursive;
+	font-size: 1rem;
+	color: #8d83a8;
+}

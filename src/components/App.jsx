@@ -47,6 +47,11 @@ function App() {
 		}
 
 		return false;
+		// {
+		// 	searchTerm && (
+		// 		<X className="clear-search" onClick={() => setSearchTerm("")} />
+		// 	);
+		// }
 	});
 
 	function addNote(type) {
@@ -165,14 +170,14 @@ function App() {
 			<div className="content">
 				<Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 				<MainContent>
-					<NotesGrid className="notes-grid">
-						{filteredNotes.length === 0 ? (
-							<div className="empty-state">
-								<h2>🔮 Nothing in the crystal ball...</h2>
-								<p>No notes match your search.</p>
-							</div>
-						) : (
-							filteredNotes.map((note) => {
+					{filteredNotes.length === 0 ? (
+						<div className="empty-state">
+							<h2>🔮 Nothing in the crystal ball...</h2>
+							<p>No notes match your search.</p>
+						</div>
+					) : (
+						<NotesGrid className="notes-grid">
+							{filteredNotes.map((note) => {
 								switch (note.type) {
 									case "memo":
 										return (
@@ -229,9 +234,9 @@ function App() {
 									default:
 										return null;
 								}
-							})
-						)}
-					</NotesGrid>
+							})}
+						</NotesGrid>
+					)}
 				</MainContent>
 			</div>
 			<Footer />
