@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import { Moon, Sun } from "lucide-react";
 
 function Header(props) {
 	return (
@@ -10,6 +11,22 @@ function Header(props) {
 			</div>
 			<div className="header-right">
 				<SearchBar value={props.searchTerm} onChange={props.setSearchTerm} />
+				{/* <button
+					className="theme-toggle"
+					onClick={() => props.setDarkMode(!props.darkMode)}
+				>
+					{props.darkMode ? <Sun /> : <Moon />}
+				</button> */}
+
+				<div
+					className={`theme-toggle ${props.darkMode ? "active" : ""}`}
+					onClick={() => props.setDarkMode(!props.darkMode)}
+				>
+					<div className="toggle-thumb">
+						{props.darkMode ? <Moon size={24} /> : <Sun size={24} />}
+					</div>
+				</div>
+
 				<img
 					src="./images/right-corner-moon.png"
 					alt=""

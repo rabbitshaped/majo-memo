@@ -10,6 +10,14 @@ import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
 
 function App() {
+	const [darkMode, setDarkMode] = useState(() => {
+		return localStorage.getItem("theme") === "dark";
+	});
+
+	useEffect(() => {
+		localStorage.setItem("theme", darkMode ? "dark" : "light");
+	}, [darkMode]);
+
 	const [notes, setNotes] = useState(() => {
 		const savedNotes = localStorage.getItem("notes");
 
@@ -165,10 +173,15 @@ function App() {
 	}
 
 	return (
-		<div className="app">
+		<div className={`app ${darkMode ? "dark-theme" : ""}`}>
 			<Sidebar onCreate={addNote} />
 			<div className="content">
-				<Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+				<Header
+					searchTerm={searchTerm}
+					setSearchTerm={setSearchTerm}
+					darkMode={darkMode}
+					setDarkMode={setDarkMode}
+				/>
 				<MainContent>
 					{filteredNotes.length === 0 ? (
 						<div className="empty-state">
