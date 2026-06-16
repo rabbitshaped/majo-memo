@@ -22,6 +22,7 @@ function MemoPad(props) {
 					"--tape-image": `url(${props.tape})`,
 				}}
 			>
+				<img src="/images/faint-moon.png" className="memo-corner" alt="" />
 				<h2>{props.title || "Untitled Memo"}</h2>
 				<p>{props.content}</p>
 			</div>

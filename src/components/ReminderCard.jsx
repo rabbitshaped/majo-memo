@@ -17,6 +17,7 @@ function ReminderCard(props) {
 	if (props.preview) {
 		return (
 			<div className="memo reminder-card drag-preview">
+				<img src="/images/faint-stars.png" className="memo-corner" alt="" />
 				<h2>{props.title || "Untitled Reminder"}</h2>
 				<p>{props.content}</p>
 			</div>
@@ -33,7 +34,7 @@ function ReminderCard(props) {
 			}}
 		>
 			{/* <img src="/images/ringing-bell.png" className="reminder-corner" alt="" /> */}
-			<img src="/images/faint-moon.png" className="memo-corner" alt="" />
+			<img src="/images/faint-stars.png" className="memo-corner" alt="" />
 			{/* <span className="memo-corner">✨</span> */}
 
 			{editing ? (

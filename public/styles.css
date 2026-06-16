@@ -160,13 +160,13 @@ body,
 
 .header h1 {
 	font-family: "Caveat Brush", cursive;
-	font-size: 50px;
+	font-size: 70px;
 	color: var(--header);
 }
 
 .header p {
 	font-family: "Caveat Brush", cursive;
-	font-size: 20px;
+	font-size: 23px;
 	color: var(--header);
 }
 
