@@ -8,6 +8,9 @@ import TodoNote from "./TodoNote";
 import MemoPad from "./MemoPad";
 import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
+import SortableNote from "./SortableNote";
 
 function App() {
 	const [darkMode, setDarkMode] = useState(() => {
@@ -61,6 +64,22 @@ function App() {
 		// 	);
 		// }
 	});
+
+	function handleDragEnd(event) {
+		const { active, over } = event;
+
+		if (!over || active.id === over.id) {
+			return;
+		}
+
+		setNotes((prev) => {
+			const oldIndex = prev.findIndex((note) => note.id === active.id);
+
+			const newIndex = prev.findIndex((note) => note.id === over.id);
+
+			return arrayMove(prev, oldIndex, newIndex);
+		});
+	}
 
 	function addNote(type) {
 		const washitapes = [
@@ -168,6 +187,18 @@ function App() {
 		);
 	}
 
+	function moveNote(fromIndex, toIndex) {
+		setNotes((prev) => {
+			const updated = [...prev];
+
+			const [moved] = updated.splice(fromIndex, 1);
+
+			updated.splice(toIndex, 0, moved);
+
+			return updated;
+		});
+	}
+
 	function deleteNote(id) {
 		setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
 	}
@@ -183,72 +214,88 @@ function App() {
 					setDarkMode={setDarkMode}
 				/>
 				<MainContent>
+					{/* <button onClick={() => moveNote(0, 1)}>Swap first two notes</button> */}
 					{filteredNotes.length === 0 ? (
 						<div className="empty-state">
 							<h2>🔮 Nothing in the crystal ball...</h2>
 							<p>No notes match your search.</p>
 						</div>
 					) : (
-						<NotesGrid className="notes-grid">
-							{filteredNotes.map((note) => {
-								switch (note.type) {
-									case "memo":
-										return (
-											<MemoPad
-												key={note.id}
-												id={note.id}
-												title={note.title}
-												content={note.content}
-												tape={note.tape}
-												onUpdate={updateNote}
-												onDelete={deleteNote}
-											/>
-										);
+						<DndContext
+							collisionDetection={closestCenter}
+							onDragEnd={handleDragEnd}
+						>
+							<SortableContext items={filteredNotes.map((note) => note.id)}>
+								<NotesGrid className="notes-grid">
+									{filteredNotes.map((note) => {
+										switch (note.type) {
+											case "memo":
+												return (
+													<SortableNote id={note.id}>
+														<MemoPad
+															key={note.id}
+															id={note.id}
+															title={note.title}
+															content={note.content}
+															tape={note.tape}
+															onUpdate={updateNote}
+															onDelete={deleteNote}
+														/>{" "}
+													</SortableNote>
+												);
 
-									case "todo":
-										return (
-											<TodoNote
-												key={note.id}
-												id={note.id}
-												title={note.title}
-												items={note.items}
-												onUpdate={updateNote}
-												onDelete={deleteNote}
-												onAddItem={addTodoItem}
-												onUpdateItem={updateTodoItem}
-												onToggleItem={toggleTodoItem}
-											/>
-										);
+											case "todo":
+												return (
+													<SortableNote id={note.id}>
+														<TodoNote
+															key={note.id}
+															id={note.id}
+															title={note.title}
+															items={note.items}
+															onUpdate={updateNote}
+															onDelete={deleteNote}
+															onAddItem={addTodoItem}
+															onUpdateItem={updateTodoItem}
+															onToggleItem={toggleTodoItem}
+														/>{" "}
+													</SortableNote>
+												);
 
-									case "reminder":
-										return (
-											<ReminderCard
-												key={note.id}
-												id={note.id}
-												title={note.title}
-												content={note.content}
-												onUpdate={updateNote}
-												onDelete={deleteNote}
-											/>
-										);
+											case "reminder":
+												return (
+													<SortableNote id={note.id}>
+														<ReminderCard
+															key={note.id}
+															id={note.id}
+															title={note.title}
+															content={note.content}
+															onUpdate={updateNote}
+															onDelete={deleteNote}
+														/>{" "}
+													</SortableNote>
+												);
 
-									case "idea":
-										return (
-											<IdeaCard
-												key={note.id}
-												id={note.id}
-												title={note.title}
-												content={note.content}
-												onUpdate={updateNote}
-												onDelete={deleteNote}
-											/>
-										);
+											case "idea":
+												return (
+													<SortableNote id={note.id}>
+														<IdeaCard
+															key={note.id}
+															id={note.id}
+															title={note.title}
+															content={note.content}
+															onUpdate={updateNote}
+															onDelete={deleteNote}
+														/>{" "}
+													</SortableNote>
+												);
 
-									default:
-										return null;
-								}
-							})}
-						</NotesGrid>
+											default:
+												return null;
+										}
+									})}
+								</NotesGrid>
+							</SortableContext>
+						</DndContext>
 					)}
 				</MainContent>
 			</div>

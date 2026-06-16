@@ -59,9 +59,26 @@ body,
 	column-gap: 32px;
 	padding: 0rem 3rem;
 	padding-top: 10px;
+
+	/* display: grid;
+
+	grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+
+	gap: 32px;
+
+	align-items: start; */
 }
 
 /* ===SIDEBAR=== */
+#hat {
+	margin: 30px 50px;
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-drag: none;
+}
+
 .sidebar {
 	width: 280px;
 	flex-shrink: 0;
@@ -335,15 +352,7 @@ footer p {
 	font-family: "Yomogi", cursive;
 }
 
-#hat {
-	margin: 30px 50px;
-	pointer-events: none;
-	user-select: none;
-	-webkit-user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-drag: none;
-}
-
+/* ===FONTS=== */
 .caveat-brush-regular {
 	font-family: "Caveat Brush", cursive;
 	font-weight: 400;
