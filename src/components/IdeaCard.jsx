@@ -14,9 +14,18 @@ function IdeaCard(props) {
 		setEditing(false);
 	}
 
+	if (props.preview) {
+		return (
+			<div className="memo idea-card drag-preview">
+				<h2>{props.title || "Untitled Idea"}</h2>
+				<p>{props.content}</p>
+			</div>
+		);
+	}
+
 	return (
 		<div
-			className="memo ideas-card"
+			className="memo idea-card"
 			onBlur={(e) => {
 				if (!e.currentTarget.contains(e.relatedTarget)) {
 					setEditing(false);

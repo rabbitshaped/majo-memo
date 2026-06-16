@@ -14,6 +14,15 @@ function ReminderCard(props) {
 		setEditing(false);
 	}
 
+	if (props.preview) {
+		return (
+			<div className="memo reminder-card drag-preview">
+				<h2>{props.title || "Untitled Reminder"}</h2>
+				<p>{props.content}</p>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			className="memo reminder-card"

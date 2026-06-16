@@ -5,6 +5,15 @@ import TodoItem from "./TodoItem";
 function TodoNote(props) {
 	const [editingTitle, setEditingTitle] = useState(props.title === "");
 
+	if (props.preview) {
+		return (
+			<div className="memo todo-note drag-preview">
+				<h2>{props.title || "Untitled Todo"}</h2>
+				<ul>{props.items}</ul>
+			</div>
+		);
+	}
+
 	return (
 		<div className="memo todo-note">
 			{editingTitle ? (

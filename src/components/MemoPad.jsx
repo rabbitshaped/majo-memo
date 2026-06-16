@@ -14,6 +14,20 @@ function MemoPad(props) {
 		setEditing(false);
 	}
 
+	if (props.preview) {
+		return (
+			<div
+				className="memo memo-pad drag-preview"
+				style={{
+					"--tape-image": `url(${props.tape})`,
+				}}
+			>
+				<h2>{props.title || "Untitled Memo"}</h2>
+				<p>{props.content}</p>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			className="memo memo-pad"

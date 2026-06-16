@@ -8,7 +8,7 @@ import TodoNote from "./TodoNote";
 import MemoPad from "./MemoPad";
 import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { DndContext, pointerWithin, DragOverlay } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import SortableNote from "./SortableNote";
 
@@ -20,6 +20,8 @@ function App() {
 	useEffect(() => {
 		localStorage.setItem("theme", darkMode ? "dark" : "light");
 	}, [darkMode]);
+
+	const [activeId, setActiveId] = useState(null);
 
 	const [notes, setNotes] = useState(() => {
 		const savedNotes = localStorage.getItem("notes");
@@ -199,6 +201,93 @@ function App() {
 		});
 	}
 
+	function handleDragStart(event) {
+		setActiveId(event.active.id);
+	}
+
+	function handleDragCancel() {
+		setActiveId(null);
+	}
+
+	function handleDragEnd(event) {
+		const { active, over } = event;
+
+		if (over && active.id !== over.id) {
+			setNotes((prev) => {
+				const oldIndex = prev.findIndex((note) => note.id === active.id);
+
+				const newIndex = prev.findIndex((note) => note.id === over.id);
+
+				return arrayMove(prev, oldIndex, newIndex);
+			});
+		}
+
+		setActiveId(null);
+	}
+
+	const activeNote = notes.find((note) => note.id === activeId);
+
+	function DragPreview({ note }) {
+		const rotation = {
+			memo: "-2deg",
+			todo: "1deg",
+			reminder: "2deg",
+			idea: "-1deg",
+		};
+
+		switch (note.type) {
+			case "memo":
+				// return (
+				// 	<div
+				// 		className="memo memo-pad drag-preview"
+				// 		style={{
+				// 			"--tape-image": `url(${note.tape})`,
+				// 		}}
+				// 	>
+				// 		<h2>{note.title || "Untitled Memo"}</h2>
+				// 		<p>{note.content || "..."}</p>
+				// 	</div>
+				return (
+					<div
+						className="drag-preview-wrapper"
+						style={{
+							transform: `rotate(${rotation[note.type]})`,
+						}}
+					>
+						<MemoPad
+							id={note.id}
+							title={note.title}
+							content={note.content}
+							tape={note.tape}
+							preview={true}
+						/>
+					</div>
+				);
+
+			case "todo":
+				return (
+					<TodoNote title={note.title} items={note.items} preview={true} />
+				);
+
+			case "reminder":
+				return (
+					<ReminderCard
+						title={note.title}
+						content={note.content}
+						preview={true}
+					/>
+				);
+
+			case "idea":
+				return (
+					<IdeaCard title={note.title} content={note.content} preview={true} />
+				);
+
+			default:
+				return null;
+		}
+	}
+
 	function deleteNote(id) {
 		setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
 	}
@@ -222,8 +311,10 @@ function App() {
 						</div>
 					) : (
 						<DndContext
-							collisionDetection={closestCenter}
+							collisionDetection={pointerWithin}
+							onDragStart={handleDragStart}
 							onDragEnd={handleDragEnd}
+							onDragCancel={handleDragCancel}
 						>
 							<SortableContext items={filteredNotes.map((note) => note.id)}>
 								<NotesGrid className="notes-grid">
@@ -231,9 +322,8 @@ function App() {
 										switch (note.type) {
 											case "memo":
 												return (
-													<SortableNote id={note.id}>
+													<SortableNote key={note.id} id={note.id}>
 														<MemoPad
-															key={note.id}
 															id={note.id}
 															title={note.title}
 															content={note.content}
@@ -246,9 +336,8 @@ function App() {
 
 											case "todo":
 												return (
-													<SortableNote id={note.id}>
+													<SortableNote key={note.id} id={note.id}>
 														<TodoNote
-															key={note.id}
 															id={note.id}
 															title={note.title}
 															items={note.items}
@@ -263,9 +352,8 @@ function App() {
 
 											case "reminder":
 												return (
-													<SortableNote id={note.id}>
+													<SortableNote key={note.id} id={note.id}>
 														<ReminderCard
-															key={note.id}
 															id={note.id}
 															title={note.title}
 															content={note.content}
@@ -277,9 +365,8 @@ function App() {
 
 											case "idea":
 												return (
-													<SortableNote id={note.id}>
+													<SortableNote key={note.id} id={note.id}>
 														<IdeaCard
-															key={note.id}
 															id={note.id}
 															title={note.title}
 															content={note.content}
@@ -295,6 +382,13 @@ function App() {
 									})}
 								</NotesGrid>
 							</SortableContext>
+							<DragOverlay>
+								{activeNote ? (
+									<div className="drag-preview-wrapper">
+										<DragPreview note={activeNote} />
+									</div>
+								) : null}
+							</DragOverlay>
 						</DndContext>
 					)}
 				</MainContent>
