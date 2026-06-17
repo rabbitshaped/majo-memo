@@ -6,10 +6,6 @@ function ReminderCard(props) {
 		props.title === "" && props.content === "",
 	);
 
-	function handleDelete() {
-		props.onDelete(props.id);
-	}
-
 	function finishEditing() {
 		setEditing(false);
 	}

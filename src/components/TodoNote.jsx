@@ -9,7 +9,13 @@ function TodoNote(props) {
 		return (
 			<div className="memo todo-note drag-preview">
 				<h2>{props.title || "Untitled Todo"}</h2>
-				<ul>{props.items}</ul>
+				<ul>
+					{props.items?.map((item) => (
+						<li key={item.id} className={item.completed ? "completed-text" : ""}>
+							{item.text || "New task"}
+						</li>
+					))}
+				</ul>
 			</div>
 		);
 	}

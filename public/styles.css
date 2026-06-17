@@ -196,6 +196,10 @@ body,
 	align-items: center;
 }
 
+.header-right .search-container {
+	margin-bottom: 0;
+}
+
 .search {
 	width: 300px;
 	max-width: 100%;
@@ -601,48 +605,53 @@ li {
 }
 
 .dark-theme {
-	--bg: #120d24;
+	--bg: #11152d;
 
-	--surface: #24183d;
-	--surface-alt: #2d1e49;
+	--surface: #201735;
+	--surface-alt: #2a1e43;
 
-	--primary: #c38fff;
-	--primary-light: #e0b7ff;
+	--primary: #c9a6ff;
+	--primary-light: #ead9ff;
 
-	--text: #f1e9ff;
-	--muted: #bba6dd;
+	--text: #f7edff;
+	--muted: #cab8e6;
 
-	--border: #473067;
+	--border: #4a3a70;
 
-	--shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+	--shadow: 0 12px 34px rgba(3, 5, 18, 0.46);
 
-	--sidebar: #5d4366;
-	--header: #b479cf;
-	--btn_bg: #281e30;
-	--highlight: #c4aaf3;
-	--note_title: #9775f3;
-	--memo_bg: #75463f;
-	--reminder_bg: #6e3e77;
-	--idea_bg: #8f3ae4;
-	--footer: #51375a;
+	--sidebar: #181c3a;
+	--header: #d8bcff;
+	--btn_bg: #292344;
+	--highlight: #8f73d9;
+	--note_title: #f1d4ff;
+	--memo_bg: #281d3c;
+	--reminder_bg: #332246;
+	--idea_bg: #222c4b;
+	--footer: #171a34;
 }
 
 /* Darkmode switch */
 .theme-toggle {
-	width: 64px;
-	height: 34px;
+	width: 56px;
+	height: 32px;
+	flex: 0 0 56px;
 
 	border-radius: 999px;
 
 	background: #e7d8fa;
 
 	border: 1px solid #d8c7f3;
+	box-shadow: 0 6px 16px rgba(129, 98, 171, 0.12);
 
 	cursor: pointer;
 
 	position: relative;
 
-	transition: 0.3s;
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease,
+		box-shadow 180ms ease;
 }
 
 .toggle-thumb {
@@ -651,8 +660,8 @@ li {
 	top: 3px;
 	left: 3px;
 
-	width: 26px;
-	height: 26px;
+	width: 24px;
+	height: 24px;
 
 	border-radius: 50%;
 
@@ -664,29 +673,34 @@ li {
 
 	color: var(--primary);
 
-	transition: 0.3s;
+	transition:
+		transform 180ms ease,
+		background-color 180ms ease,
+		color 180ms ease;
 }
 
 .theme-toggle.active {
-	background: #2b1d44;
+	background: #252044;
+	border-color: #655098;
+	box-shadow: 0 6px 16px rgba(6, 8, 24, 0.34);
 }
 
 .theme-toggle.active .toggle-thumb {
-	transform: translateX(30px);
+	transform: translateX(24px);
 
-	background: #c38fff;
+	background: #c9a6ff;
 
-	color: white;
+	color: #17142c;
 }
 
 .dark-theme .memo {
 	background: linear-gradient(
 		135deg,
-		rgba(75, 45, 120, 0.95),
-		rgba(38, 22, 63, 0.95)
+		rgba(35, 25, 57, 0.98),
+		rgba(22, 27, 55, 0.98)
 	);
 
-	border-color: rgba(180, 120, 255, 0.2);
+	border-color: rgba(217, 188, 255, 0.22);
 }
 
 .dark-theme .memo h2 {
@@ -890,6 +904,8 @@ footer {
 
 .todo-note {
 	box-shadow: var(--note-shadow);
+	border-radius: 2px;
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .todo-checkbox {
@@ -968,8 +984,8 @@ footer {
 
 .dark-theme.app {
 	background:
-		radial-gradient(circle at 82% 9%, rgba(183, 126, 255, 0.16), transparent 20rem),
-		radial-gradient(circle at 12% 22%, rgba(255, 185, 231, 0.09), transparent 18rem),
+		radial-gradient(circle at 82% 9%, rgba(167, 125, 255, 0.18), transparent 20rem),
+		radial-gradient(circle at 12% 22%, rgba(88, 119, 195, 0.12), transparent 18rem),
 		linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 18px),
 		var(--bg);
 }
@@ -982,15 +998,15 @@ footer {
 }
 
 .dark-theme .search {
-	background: #211631;
+	background: #1b1d38;
 	color: var(--text);
 }
 
 .dark-theme .memo-pad {
 	background:
-		linear-gradient(90deg, transparent 0 23px, rgba(255, 193, 226, 0.18) 24px 25px, transparent 26px),
-		linear-gradient(rgba(255, 218, 252, 0.09) 1px, transparent 1px),
-		linear-gradient(135deg, rgba(117, 70, 63, 0.96), rgba(70, 42, 66, 0.96));
+		linear-gradient(90deg, transparent 0 23px, rgba(222, 176, 255, 0.18) 24px 25px, transparent 26px),
+		linear-gradient(rgba(235, 220, 255, 0.08) 1px, transparent 1px),
+		linear-gradient(135deg, rgba(39, 29, 60, 0.98), rgba(27, 31, 61, 0.98));
 	background-size: auto, 100% 28px, auto;
 }
 
@@ -1014,7 +1030,7 @@ footer {
 
 .dark-theme .reminder-card {
 	background:
-		linear-gradient(135deg, rgba(110, 62, 119, 0.96), rgba(64, 38, 89, 0.96));
+		linear-gradient(135deg, rgba(51, 34, 70, 0.98), rgba(31, 35, 68, 0.98));
 }
 
 .dark-theme .reminder-card::before {
@@ -1026,8 +1042,10 @@ footer {
 }
 
 .dark-theme .todo-note {
+	border-radius: 2px;
+	background-color: #20233f;
 	background-image:
-		linear-gradient(rgba(54, 31, 70, 0.2), rgba(54, 31, 70, 0.2)),
+		linear-gradient(rgba(17, 21, 45, 0.34), rgba(17, 21, 45, 0.34)),
 		url("/images/todobg.png");
 	background-size:
 		cover,
@@ -1036,14 +1054,15 @@ footer {
 		center,
 		center -2px;
 	background-repeat: no-repeat;
+	color: var(--text);
 }
 
 .dark-theme .idea-card {
-	background-color: var(--idea_bg);
+	background-color: #222c4b;
 	background-image:
 		url("/images/sparkle.png"),
-		linear-gradient(rgba(255, 223, 255, 0.08) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(255, 223, 255, 0.08) 1px, transparent 1px);
+		linear-gradient(rgba(221, 210, 255, 0.08) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(221, 210, 255, 0.08) 1px, transparent 1px);
 	background-position:
 		right 14px top 12px,
 		0 0,
@@ -1056,7 +1075,12 @@ footer {
 }
 
 .dark-theme .empty-state {
-	background: #211631;
+	background: #1b1d38;
+	color: var(--text);
+}
+
+.dark-theme footer p {
+	color: #eadcff;
 }
 
 @keyframes note-pop {
@@ -1145,6 +1169,10 @@ footer {
 		gap: 0.75rem;
 	}
 
+	.theme-toggle {
+		align-self: flex-end;
+	}
+
 	.search-container {
 		margin-bottom: 1rem;
 	}
@@ -1174,6 +1202,10 @@ footer {
 		justify-content: space-between;
 		align-items: center;
 		margin-top: 0.75rem;
+	}
+
+	.theme-toggle {
+		align-self: center;
 	}
 
 	.search-container input {

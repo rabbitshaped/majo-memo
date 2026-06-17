@@ -203,18 +203,6 @@ function App() {
 		);
 	}
 
-	function moveNote(fromIndex, toIndex) {
-		setNotes((prev) => {
-			const updated = [...prev];
-
-			const [moved] = updated.splice(fromIndex, 1);
-
-			updated.splice(toIndex, 0, moved);
-
-			return updated;
-		});
-	}
-
 	function handleDragStart(event) {
 		setActiveId(event.active.id);
 	}
