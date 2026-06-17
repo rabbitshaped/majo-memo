@@ -7,7 +7,7 @@ import { Sparkles } from "lucide-react";
 function Sidebar(props) {
 	return (
 		<aside className="sidebar">
-			<img id="hat" src="./images/witch-hat.png" alt="witch hat logo" />
+			<img id="book" src="./images/diary.png" alt="witch diary" />
 			{/* <button className="sidebar-btn new memo-btn">
 				<Moon size={20} /> New Memo
 			</button>

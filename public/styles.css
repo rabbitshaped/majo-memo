@@ -70,10 +70,11 @@ body,
 }
 
 /* ===SIDEBAR=== */
-#hat {
+#book {
 	margin: 30px 50px;
 	pointer-events: none;
 	user-select: none;
+	height: 80px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 	-webkit-user-drag: none;
@@ -165,8 +166,8 @@ body,
 }
 
 .header p {
-	font-family: "Caveat Brush", cursive;
-	font-size: 23px;
+	font-family: "Yomogi", cursive;
+	font-size: 15px;
 	color: var(--header);
 }
 
@@ -270,7 +271,7 @@ body,
 	background-position: center;
 	background-image: var(--tape-image);
 	/* background: rgba(200, 180, 255, 0.4); */
-	opacity: 0.6;
+	opacity: 0.8;
 	border-radius: 6px;
 }
 
@@ -290,7 +291,7 @@ body,
 	position: absolute;
 	top: 26px;
 	right: 50px;
-	/* opacity: 0.6; */
+	opacity: 0.1;
 	font-size: 1rem;
 }
 
@@ -326,12 +327,14 @@ body,
 .memo-pad {
 	background: var(--memo_bg);
 	margin-top: 10px;
+	border-radius: 18px 22px 17px 24px;
 }
 
 .reminder-card {
 	background: var(--reminder_bg);
 	margin-top: 32px;
 	padding-top: 40px;
+	border-radius: 18px 22px 17px 24px;
 }
 
 .idea-card {
@@ -341,6 +344,7 @@ body,
 		linear-gradient(90deg, rgba(180, 160, 240, 0.1) 1px, transparent 1px);
 	background-size: 24px 24px;
 	padding-top: 24px;
+	border-radius: 18px 22px 17px 24px;
 }
 
 /* ===FOOTER=== */
@@ -439,14 +443,18 @@ footer p {
 	position: relative;
 	padding-top: 38px;
 	content: "";
-	border: none;
+	background-color: #fdf7f7;
 	background-image: url("/images/todobg.png");
 	background-size: cover;
 	background-size: 100% auto;
+	/* background-size: 100% 180px; */
 	background-position: center -2px;
+	background-position: top center;
 	background-repeat: no-repeat;
 	min-height: 200px;
 	border-radius: 8px;
+	box-shadow: var(--note-shadow);
+	/* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
 }
 
 .checkbox {
@@ -787,9 +795,10 @@ li {
 :root {
 	--paper-edge: rgba(104, 72, 134, 0.12);
 	--paper-highlight: rgba(255, 255, 255, 0.62);
-	--note-shadow: 0 12px 24px rgba(114, 83, 155, 0.12),
-		0 2px 0 rgba(255, 255, 255, 0.6) inset;
-	--note-shadow-hover: 0 20px 42px rgba(114, 83, 155, 0.18),
+	--note-shadow:
+		0 12px 24px rgba(114, 83, 155, 0.12), 0 2px 0 rgba(255, 255, 255, 0.6) inset;
+	--note-shadow-hover:
+		0 20px 42px rgba(114, 83, 155, 0.18),
 		0 2px 0 rgba(255, 255, 255, 0.72) inset;
 	--lift-shadow: 0 28px 58px rgba(56, 35, 82, 0.28);
 }
@@ -797,8 +806,16 @@ li {
 .app {
 	padding-bottom: 4rem;
 	background:
-		radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.58), transparent 26rem),
-		linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0 1px, transparent 1px 18px),
+		radial-gradient(
+			circle at 18% 12%,
+			rgba(255, 255, 255, 0.58),
+			transparent 26rem
+		),
+		linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.28) 0 1px,
+			transparent 1px 18px
+		),
 		var(--bg);
 	color: var(--text, #4a3d68);
 }
@@ -849,7 +866,6 @@ li {
 }
 
 .memo {
-	border-radius: 18px 22px 17px 24px;
 	box-shadow: var(--note-shadow);
 	transform-origin: 50% 18px;
 	transition:
@@ -873,10 +889,18 @@ li {
 
 .memo-pad {
 	background:
-		linear-gradient(90deg, transparent 0 23px, rgba(222, 153, 153, 0.16) 24px 25px, transparent 26px),
+		linear-gradient(
+			90deg,
+			transparent 0 23px,
+			rgba(222, 153, 153, 0.16) 24px 25px,
+			transparent 26px
+		),
 		linear-gradient(rgba(134, 105, 134, 0.08) 1px, transparent 1px),
 		var(--memo_bg);
-	background-size: auto, 100% 28px, auto;
+	background-size:
+		auto,
+		100% 28px,
+		auto;
 }
 
 .memo-pad::before {
@@ -902,12 +926,6 @@ footer {
 	z-index: 5;
 }
 
-.todo-note {
-	box-shadow: var(--note-shadow);
-	border-radius: 2px;
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
 .todo-checkbox {
 	transition:
 		transform 160ms ease,
@@ -926,7 +944,7 @@ footer {
 }
 
 .drag-strip:focus-visible {
-	outline: 2px dashed var(--primary);
+	/* outline: 2px dashed var(--primary); */
 	outline-offset: -6px;
 }
 
@@ -975,18 +993,30 @@ footer {
 .dark-theme {
 	--paper-edge: rgba(255, 226, 255, 0.13);
 	--paper-highlight: rgba(255, 235, 255, 0.16);
-	--note-shadow: 0 16px 34px rgba(0, 0, 0, 0.36),
-		0 1px 0 rgba(255, 223, 255, 0.08) inset;
-	--note-shadow-hover: 0 24px 52px rgba(0, 0, 0, 0.46),
-		0 1px 0 rgba(255, 223, 255, 0.1) inset;
+	--note-shadow:
+		0 16px 34px rgba(0, 0, 0, 0.36), 0 1px 0 rgba(255, 223, 255, 0.08) inset;
+	--note-shadow-hover:
+		0 24px 52px rgba(0, 0, 0, 0.46), 0 1px 0 rgba(255, 223, 255, 0.1) inset;
 	--lift-shadow: 0 32px 66px rgba(0, 0, 0, 0.54);
 }
 
 .dark-theme.app {
 	background:
-		radial-gradient(circle at 82% 9%, rgba(167, 125, 255, 0.18), transparent 20rem),
-		radial-gradient(circle at 12% 22%, rgba(88, 119, 195, 0.12), transparent 18rem),
-		linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 18px),
+		radial-gradient(
+			circle at 82% 9%,
+			rgba(167, 125, 255, 0.18),
+			transparent 20rem
+		),
+		radial-gradient(
+			circle at 12% 22%,
+			rgba(88, 119, 195, 0.12),
+			transparent 18rem
+		),
+		linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.035) 0 1px,
+			transparent 1px 18px
+		),
 		var(--bg);
 }
 
@@ -1004,19 +1034,24 @@ footer {
 
 .dark-theme .memo-pad {
 	background:
-		linear-gradient(90deg, transparent 0 23px, rgba(222, 176, 255, 0.18) 24px 25px, transparent 26px),
+		linear-gradient(
+			90deg,
+			transparent 0 23px,
+			rgba(222, 176, 255, 0.18) 24px 25px,
+			transparent 26px
+		),
 		linear-gradient(rgba(235, 220, 255, 0.08) 1px, transparent 1px),
 		linear-gradient(135deg, rgba(39, 29, 60, 0.98), rgba(27, 31, 61, 0.98));
-	background-size: auto, 100% 28px, auto;
+	background-size:
+		auto,
+		100% 28px,
+		auto;
 }
 
 .dark-theme .memo-pad::before {
 	background-image: var(--dark-tape-image);
 	opacity: 0.92;
-	filter:
-		hue-rotate(34deg)
-		saturate(1.16)
-		brightness(0.82)
+	filter: hue-rotate(34deg) saturate(1.16) brightness(0.82)
 		drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
 }
 
@@ -1029,24 +1064,34 @@ footer {
 }
 
 .dark-theme .reminder-card {
-	background:
-		linear-gradient(135deg, rgba(51, 34, 70, 0.98), rgba(31, 35, 68, 0.98));
+	background: linear-gradient(
+		135deg,
+		rgba(51, 34, 70, 0.98),
+		rgba(31, 35, 68, 0.98)
+	);
 }
 
 .dark-theme .reminder-card::before {
-	filter:
-		hue-rotate(32deg)
-		saturate(1.18)
-		brightness(0.96)
-		drop-shadow(0 8px 10px rgba(0, 0, 0, 0.32));
+	/* filter: hue-rotate(32deg) saturate(1.18) brightness(0.96)
+		drop-shadow(0 8px 10px rgba(0, 0, 0, 0.32)); */
+	content: "";
+	position: absolute;
+	top: -40px;
+	left: 50%;
+	width: 70px;
+	height: 70px;
+	transform: translateX(-50%);
+	background-image: url("/images/reminder-clip-dark.png");
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .dark-theme .todo-note {
-	border-radius: 2px;
+	border-radius: 4px;
 	background-color: #20233f;
 	background-image:
 		linear-gradient(rgba(17, 21, 45, 0.34), rgba(17, 21, 45, 0.34)),
-		url("/images/todobg.png");
+		url("/images/todobg-dark.png");
 	background-size:
 		cover,
 		100% auto;
@@ -1055,12 +1100,13 @@ footer {
 		center -2px;
 	background-repeat: no-repeat;
 	color: var(--text);
+	border-top: none;
 }
 
 .dark-theme .idea-card {
 	background-color: #222c4b;
 	background-image:
-		url("/images/sparkle.png"),
+		url("/images/crystal.png"),
 		linear-gradient(rgba(221, 210, 255, 0.08) 1px, transparent 1px),
 		linear-gradient(90deg, rgba(221, 210, 255, 0.08) 1px, transparent 1px);
 	background-position:
@@ -1132,7 +1178,7 @@ footer {
 		border-bottom: 1px solid var(--border);
 	}
 
-	#hat,
+	#book,
 	.sidebar > img:last-child {
 		display: none;
 	}
@@ -1195,6 +1241,7 @@ footer {
 
 	.header {
 		display: block;
+		margin-bottom: 1.5rem;
 	}
 
 	.header-right {
@@ -1206,6 +1253,10 @@ footer {
 
 	.theme-toggle {
 		align-self: center;
+	}
+
+	.search-container {
+		margin-bottom: 1.5rem;
 	}
 
 	.search-container input {
@@ -1220,7 +1271,7 @@ footer {
 
 	.memo {
 		margin-bottom: 18px;
-		padding: 1.25rem;
+		padding-top: 2rem;
 	}
 
 	.memo-title,
@@ -1240,4 +1291,9 @@ footer {
 		scroll-behavior: auto !important;
 		transition-duration: 1ms !important;
 	}
+}
+
+.todo-note::before,
+.todo-note::after {
+	display: none;
 }
