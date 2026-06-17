@@ -92,17 +92,15 @@ function App() {
 			"/images/washi-2.png",
 			"/images/washi-3.png",
 			"/images/washi-4.png",
-			"/images/washi-5.png",
 			"/images/washi-7.png",
 			"/images/washi-8.png",
 			"/images/washi-9.png",
-			"/images/washi-10.png",
 		];
 		const darkWashitapes = [
-			"/images/washi-8.png",
-			"/images/washi-9.png",
+			"/images/washi-5.png",
+			"/images/washi-6.png",
 			"/images/washi-10.png",
-			"/images/washi-4.png",
+			"/images/washi-11.png",
 		];
 
 		const randomTape =
