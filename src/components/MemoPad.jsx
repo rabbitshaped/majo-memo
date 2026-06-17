@@ -20,6 +20,7 @@ function MemoPad(props) {
 				className="memo memo-pad drag-preview"
 				style={{
 					"--tape-image": `url(${props.tape})`,
+					"--dark-tape-image": `url(${props.darkTape || props.tape})`,
 				}}
 			>
 				<img src="/images/faint-moon.png" className="memo-corner" alt="" />
@@ -34,6 +35,7 @@ function MemoPad(props) {
 			className="memo memo-pad"
 			style={{
 				"--tape-image": `url(${props.tape})`,
+				"--dark-tape-image": `url(${props.darkTape || props.tape})`,
 			}}
 			onBlur={(e) => {
 				if (!e.currentTarget.contains(e.relatedTarget)) {

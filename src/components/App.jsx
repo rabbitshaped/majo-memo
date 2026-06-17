@@ -8,7 +8,15 @@ import TodoNote from "./TodoNote";
 import MemoPad from "./MemoPad";
 import ReminderCard from "./ReminderCard";
 import IdeaCard from "./IdeaCard";
-import { DndContext, pointerWithin, DragOverlay } from "@dnd-kit/core";
+import {
+	DndContext,
+	pointerWithin,
+	DragOverlay,
+	PointerSensor,
+	KeyboardSensor,
+	useSensor,
+	useSensors,
+} from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import SortableNote from "./SortableNote";
 
@@ -22,6 +30,17 @@ function App() {
 	}, [darkMode]);
 
 	const [activeId, setActiveId] = useState(null);
+	const [recentlyAddedId, setRecentlyAddedId] = useState(null);
+	const [deletingNoteIds, setDeletingNoteIds] = useState(() => new Set());
+
+	const sensors = useSensors(
+		useSensor(PointerSensor, {
+			activationConstraint: {
+				distance: 8,
+			},
+		}),
+		useSensor(KeyboardSensor),
+	);
 
 	const [notes, setNotes] = useState(() => {
 		const savedNotes = localStorage.getItem("notes");
@@ -67,22 +86,6 @@ function App() {
 		// }
 	});
 
-	function handleDragEnd(event) {
-		const { active, over } = event;
-
-		if (!over || active.id === over.id) {
-			return;
-		}
-
-		setNotes((prev) => {
-			const oldIndex = prev.findIndex((note) => note.id === active.id);
-
-			const newIndex = prev.findIndex((note) => note.id === over.id);
-
-			return arrayMove(prev, oldIndex, newIndex);
-		});
-	}
-
 	function addNote(type) {
 		const washitapes = [
 			"/images/washi-1.png",
@@ -95,9 +98,17 @@ function App() {
 			"/images/washi-9.png",
 			"/images/washi-10.png",
 		];
+		const darkWashitapes = [
+			"/images/washi-8.png",
+			"/images/washi-9.png",
+			"/images/washi-10.png",
+			"/images/washi-4.png",
+		];
 
 		const randomTape =
 			washitapes[Math.floor(Math.random() * washitapes.length)];
+		const randomDarkTape =
+			darkWashitapes[Math.floor(Math.random() * darkWashitapes.length)];
 
 		const newNote = {
 			id: crypto.randomUUID(),
@@ -105,6 +116,7 @@ function App() {
 			title: "",
 			content: "",
 			tape: type === "memo" ? randomTape : null,
+			darkTape: type === "memo" ? randomDarkTape : null,
 
 			items:
 				type === "todo"
@@ -119,6 +131,8 @@ function App() {
 		};
 
 		setNotes((prev) => [...prev, newNote]);
+		setRecentlyAddedId(newNote.id);
+		window.setTimeout(() => setRecentlyAddedId(null), 550);
 	}
 
 	function updateNote(id, field, value) {
@@ -259,6 +273,7 @@ function App() {
 							title={note.title}
 							content={note.content}
 							tape={note.tape}
+							darkTape={note.darkTape}
 							preview={true}
 						/>
 					</div>
@@ -289,7 +304,16 @@ function App() {
 	}
 
 	function deleteNote(id) {
-		setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+		setDeletingNoteIds((prev) => new Set(prev).add(id));
+
+		window.setTimeout(() => {
+			setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+			setDeletingNoteIds((prev) => {
+				const next = new Set(prev);
+				next.delete(id);
+				return next;
+			});
+		}, 220);
 	}
 
 	return (
@@ -306,11 +330,12 @@ function App() {
 					{/* <button onClick={() => moveNote(0, 1)}>Swap first two notes</button> */}
 					{filteredNotes.length === 0 ? (
 						<div className="empty-state">
-							<h2>🔮 Nothing in the crystal ball...</h2>
+							<h2>Nothing in the crystal ball...</h2>
 							<p>No notes match your search.</p>
 						</div>
 					) : (
 						<DndContext
+							sensors={sensors}
 							collisionDetection={pointerWithin}
 							onDragStart={handleDragStart}
 							onDragEnd={handleDragEnd}
@@ -319,15 +344,24 @@ function App() {
 							<SortableContext items={filteredNotes.map((note) => note.id)}>
 								<NotesGrid className="notes-grid">
 									{filteredNotes.map((note) => {
+										const isNew = note.id === recentlyAddedId;
+										const isDeleting = deletingNoteIds.has(note.id);
+
 										switch (note.type) {
 											case "memo":
 												return (
-													<SortableNote key={note.id} id={note.id}>
+													<SortableNote
+														key={note.id}
+														id={note.id}
+														isNew={isNew}
+														isDeleting={isDeleting}
+													>
 														<MemoPad
 															id={note.id}
 															title={note.title}
 															content={note.content}
 															tape={note.tape}
+															darkTape={note.darkTape}
 															onUpdate={updateNote}
 															onDelete={deleteNote}
 														/>{" "}
@@ -336,7 +370,12 @@ function App() {
 
 											case "todo":
 												return (
-													<SortableNote key={note.id} id={note.id}>
+													<SortableNote
+														key={note.id}
+														id={note.id}
+														isNew={isNew}
+														isDeleting={isDeleting}
+													>
 														<TodoNote
 															id={note.id}
 															title={note.title}
@@ -352,7 +391,12 @@ function App() {
 
 											case "reminder":
 												return (
-													<SortableNote key={note.id} id={note.id}>
+													<SortableNote
+														key={note.id}
+														id={note.id}
+														isNew={isNew}
+														isDeleting={isDeleting}
+													>
 														<ReminderCard
 															id={note.id}
 															title={note.title}
@@ -365,7 +409,12 @@ function App() {
 
 											case "idea":
 												return (
-													<SortableNote key={note.id} id={note.id}>
+													<SortableNote
+														key={note.id}
+														id={note.id}
+														isNew={isNew}
+														isDeleting={isDeleting}
+													>
 														<IdeaCard
 															id={note.id}
 															title={note.title}
