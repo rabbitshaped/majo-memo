@@ -18,15 +18,19 @@ Majo Memo combines simple note-taking with magical-themed memo pads, to-do lists
 * Press **Enter** or click outside the note to save changes.
 * Notes automatically switch between editing and reading modes.
 
+### Includes
+* Drag-and-drop with a faded note visible.
+* Categories and filtering (in sidebar and searchbar).
+* Local note storage.
+* Search through notes; includes empty state when nothing is found.
+
 ### Visual personality
 
 * Randomized washi tape for memo notes.
 * Handwritten-style typography.
 * Different backgrounds for different note types.
 * Cute witch-inspired UI with soft purple tones.
-* Darkmode available in toggle, for dark purple tones (work in progress).
-* Local storage persists.
-* Search through notes; includes empty state when nothing is found.
+* Darkmode available in toggle, for dark blue/purple tones.
 
 ## Tech Stack
 
@@ -37,16 +41,13 @@ Majo Memo combines simple note-taking with magical-themed memo pads, to-do lists
 
 ## Known Issues
 
-* Notes overflow past the footer after layout is full.
-* Responsiveness is not yet added -- as it is, this app is presently desktop-only.
+* Responsiveness is not quite done.
 
 ## Planned Features
 
 ### Organization
 
-* Drag and drop note ordering (partially done)
 * Pin/star favorite notes
-* Categories and filtering (in sidebar)
 
 ### Visual Improvements
 
@@ -66,7 +67,6 @@ This project started from Angela Yu's note-taking tutorial "Keeper" and graduall
 ## Screenshots
 <img width="500" alt="screencapture-localhost-5173-2026-06-18-11_55_38" src="https://github.com/user-attachments/assets/5085d968-cfcf-40e3-b853-669a3223d549" />
 <img width="500" alt="screencapture-localhost-5173-2026-06-18-11_55_50" src="https://github.com/user-attachments/assets/3f08179f-0ec4-4890-9a2d-1a7ae1995692" />
-
 
 ---
 
