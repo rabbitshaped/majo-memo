@@ -53,9 +53,14 @@ function App() {
 	}, [notes]);
 
 	const [searchTerm, setSearchTerm] = useState("");
+	const [activeFilter, setActiveFilter] = useState("all");
 
 	const filteredNotes = notes.filter((note) => {
 		const query = searchTerm.toLowerCase();
+
+		if (activeFilter !== "all" && note.type !== activeFilter) {
+			return false;
+		}
 
 		if (!query) return true;
 
@@ -79,11 +84,6 @@ function App() {
 		}
 
 		return false;
-		// {
-		// 	searchTerm && (
-		// 		<X className="clear-search" onClick={() => setSearchTerm("")} />
-		// 	);
-		// }
 	});
 
 	function addNote(type) {
@@ -304,7 +304,11 @@ function App() {
 
 	return (
 		<div className={`app ${darkMode ? "dark-theme" : ""}`}>
-			<Sidebar onCreate={addNote} />
+			<Sidebar
+				onCreate={addNote}
+				activeFilter={activeFilter}
+				onFilterChange={setActiveFilter}
+			/>
 			<div className="content">
 				<Header
 					searchTerm={searchTerm}
@@ -339,6 +343,7 @@ function App() {
 													<SortableNote
 														key={note.id}
 														id={note.id}
+														type={note.type}
 														isNew={isNew}
 														isDeleting={isDeleting}
 													>
@@ -359,6 +364,7 @@ function App() {
 													<SortableNote
 														key={note.id}
 														id={note.id}
+														type={note.type}
 														isNew={isNew}
 														isDeleting={isDeleting}
 													>
@@ -380,6 +386,7 @@ function App() {
 													<SortableNote
 														key={note.id}
 														id={note.id}
+														type={note.type}
 														isNew={isNew}
 														isDeleting={isDeleting}
 													>
@@ -398,6 +405,7 @@ function App() {
 													<SortableNote
 														key={note.id}
 														id={note.id}
+														type={note.type}
 														isNew={isNew}
 														isDeleting={isDeleting}
 													>

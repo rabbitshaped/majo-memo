@@ -39,7 +39,6 @@ function MemoPad(props) {
 				}
 			}}
 		>
-			{/* <span className="memo-corner">🌸</span> */}
 			<img src="/images/faint-moon.png" className="memo-corner" alt="" />
 
 			{editing ? (

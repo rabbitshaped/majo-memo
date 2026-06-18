@@ -29,9 +29,7 @@ function ReminderCard(props) {
 				}
 			}}
 		>
-			{/* <img src="/images/ringing-bell.png" className="reminder-corner" alt="" /> */}
 			<img src="/images/lavender.png" className="reminder-corner" alt="" />
-			{/* <span className="memo-corner">✨</span> */}
 
 			{editing ? (
 				<>

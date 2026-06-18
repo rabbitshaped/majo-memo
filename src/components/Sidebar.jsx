@@ -1,35 +1,19 @@
 import React from "react";
-import { Moon } from "lucide-react";
-import { Astroid } from "lucide-react";
-import { AlarmClock } from "lucide-react";
-import { Sparkles } from "lucide-react";
+import { AlarmClock, Astroid, ListFilter, Moon, Sparkles } from "lucide-react";
 
 function Sidebar(props) {
+	const filters = [
+		{ id: "all", label: "All Notes", icon: ListFilter },
+		{ id: "memo", label: "Memos", icon: Moon },
+		{ id: "todo", label: "Todos", icon: Astroid },
+		{ id: "reminder", label: "Reminders", icon: AlarmClock },
+		{ id: "idea", label: "Ideas", icon: Sparkles },
+	];
+
 	return (
 		<aside className="sidebar">
 			<img id="book" src="./images/diary.png" alt="witch diary" />
-			{/* <button className="sidebar-btn new memo-btn">
-				<Moon size={20} /> New Memo
-			</button>
-			<button className="sidebar-btn new todo-btn">
-				<Astroid size={20} /> New Todo
-			</button>
-			<button className="sidebar-btn new reminder-btn">
-				<AlarmClock size={20} /> New Reminder
-			</button>
-			<button className="sidebar-btn new idea-btn">
-				<Sparkles size={20} /> New Idea
-			</button> */}
 
-			{/* <nav className="sidebar-nav">
-				<button>📖 All Notes</button>
-				<button>⭐ Favorites</button>
-				<button>🌸 Ideas</button>
-				<button>🪄 Spells</button>
-			</nav> */}
-			{/* <div className="sidebar-footer">
-				<p>Moonlit thoughts and tiny reminders.</p>
-			</div> */}
 			<button
 				className="sidebar-btn new memo-btn"
 				onClick={() => props.onCreate("memo")}
@@ -59,6 +43,21 @@ function Sidebar(props) {
 				New Idea
 			</button>
 			<img src="/images/star-line.png" style={{ margin: 30 }} alt="" />
+
+			<nav className="filter-nav" aria-label="Filter notes">
+				{filters.map(({ id, label, icon: Icon }) => (
+					<button
+						key={id}
+						type="button"
+						className={`filter-btn ${props.activeFilter === id ? "active" : ""}`}
+						onClick={() => props.onFilterChange(id)}
+						aria-pressed={props.activeFilter === id}
+					>
+						<Icon size={18} />
+						{label}
+					</button>
+				))}
+			</nav>
 		</aside>
 	);
 }

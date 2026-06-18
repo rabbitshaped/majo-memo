@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-function SortableNote({ id, children, isNew, isDeleting }) {
+function SortableNote({ id, type, children, isNew, isDeleting }) {
 	const {
 		attributes,
 		listeners,
@@ -23,6 +23,7 @@ function SortableNote({ id, children, isNew, isDeleting }) {
 	};
 	const className = [
 		"sortable-wrapper",
+		type ? `sortable-wrapper--${type}` : "",
 		isDragging ? "is-dragging" : "",
 		isNew ? "note-new" : "",
 		isDeleting ? "note-deleting" : "",
@@ -33,7 +34,7 @@ function SortableNote({ id, children, isNew, isDeleting }) {
 	return (
 		<div ref={setNodeRef} style={style} className={className}>
 			<button
-				className="drag-strip"
+				className={`drag-strip ${type ? `drag-strip--${type}` : ""}`}
 				type="button"
 				aria-label="Drag note"
 				{...attributes}
