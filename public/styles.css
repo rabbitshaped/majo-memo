@@ -389,6 +389,7 @@ button {
 
 /* ===== 8. Shared Note Styles ===== */
 .sortable-wrapper {
+	margin-top: 20px;
 	position: relative;
 	display: block;
 	width: 100%;
@@ -403,7 +404,7 @@ button {
 	display: block;
 	width: 100%;
 	min-height: 0;
-	margin-bottom: 0;
+	/* margin-bottom: 14px; */
 	padding: 1.5rem;
 	border: 1px solid var(--border);
 	border-radius: 24px;
@@ -453,6 +454,10 @@ button {
 	outline: none;
 }
 
+.todo-title {
+	margin-top: 10px;
+}
+
 .memo p,
 .memo li,
 .memo-content,
@@ -480,10 +485,8 @@ button {
 .reminder-corner {
 	position: absolute;
 	display: block;
-	/* max-width: min(42%, 150px);
-	max-height: min(42%, 150px); */
 	object-fit: contain;
-	opacity: 0.6;
+	opacity: 0.3;
 	pointer-events: none;
 }
 
@@ -514,7 +517,7 @@ button {
 
 /* ===== 9. Memo Notes ===== */
 .memo-pad {
-	margin-top: 10px;
+	margin-top: 20px;
 	border-radius: 18px 22px 17px 24px;
 	background:
 		linear-gradient(
@@ -536,7 +539,7 @@ button {
 	position: absolute;
 	top: -15px;
 	left: 50%;
-	width: 100px;
+	width: 200px;
 	height: 32px;
 	border-radius: 6px;
 	background-image: var(--tape-image);
@@ -561,16 +564,22 @@ button {
 /* ===== 10. Todo Notes ===== */
 .todo-note {
 	min-height: 200px;
-	margin-top: 4px;
+	margin-top: 14px;
+	/* margin-bottom: 16px; */
 	padding-top: 38px;
 	border-color: transparent;
 	border-radius: 8px;
-	background-color: var(--todo_bg);
-	background-image: url("/images/todobg.png");
-	background-position: top center;
+	background-color: transparent;
+	background-image:
+		url("/images/todobg.png"), linear-gradient(var(--todo_bg), var(--todo_bg));
+	background-position:
+		top center,
+		left 80px;
 	background-repeat: no-repeat;
-	background-size: 100% auto;
-	box-shadow: var(--note-shadow);
+	background-size:
+		100% auto,
+		100% calc(100% - 30px);
+	box-shadow: 0 12px 24px rgba(114, 83, 155, 0.12);
 }
 
 .todo-note::before,
@@ -600,7 +609,7 @@ button {
 
 .todo-edit {
 	width: 100%;
-	margin: 0;
+	margin: 0px;
 	padding: 0;
 	border: none;
 	background: transparent;
@@ -650,10 +659,11 @@ button {
 /* ===== 11. Reminder Notes ===== */
 .reminder-card {
 	margin-top: 32px;
+	/* margin-bottom: 18px; */
 	padding-top: 40px;
 	border-radius: 18px 22px 17px 24px;
 	background: var(--reminder_bg);
-	overflow: hidden;
+	overflow: visible;
 }
 
 .reminder-card::before {
@@ -671,8 +681,7 @@ button {
 
 /* ===== 12. Idea Notes ===== */
 .idea-card {
-	/* margin-top: 30px;
-	margin-bottom: 20px; */
+	margin-top: 14px;
 	padding-top: 24px;
 	border-radius: 18px 22px 17px 24px;
 	background-color: var(--idea_bg);
@@ -690,7 +699,7 @@ button {
 	left: 0;
 	z-index: 100;
 	width: 100%;
-	height: 22px;
+	height: 40px;
 	border: 0;
 	background: transparent;
 	cursor: grab;
@@ -876,7 +885,7 @@ footer p {
 	--highlight: #7965c9;
 	--note_title: #e8d3ff;
 	--memo_bg: #211832;
-	--todo_bg: #171d38;
+	--todo_bg: #1b1e41;
 	--reminder_bg: #2a1d3d;
 	--idea_bg: #17213f;
 	--footer: #0f1430;
@@ -966,14 +975,14 @@ footer p {
 
 .dark-theme .memo-pad::before {
 	background-image: var(--dark-tape-image);
-	filter: hue-rotate(48deg) saturate(1.24) brightness(0.78)
-		drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
+	/* filter: hue-rotate(48deg) saturate(1.24) brightness(0.78)
+		drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28)); */
 	opacity: 0.92;
 }
 
 .dark-theme .memo-pad::after {
 	background:
-		url("/images/faint-stars.png") right 14px top 12px / 42px auto no-repeat,
+		url("/images/sparkle.png") right 64px top 12px / 42px auto no-repeat,
 		linear-gradient(135deg, rgba(219, 207, 255, 0.15), transparent 34%);
 	mix-blend-mode: screen;
 	opacity: 0.45;
@@ -982,17 +991,18 @@ footer p {
 .dark-theme .todo-note {
 	border-color: transparent;
 	border-radius: 4px;
-	background-color: var(--todo_bg);
+	background-color: transparent;
 	background-image:
-		linear-gradient(rgba(12, 16, 38, 0.18), rgba(12, 16, 38, 0.18)),
-		url("/images/todobg-dark.png");
+		url("/images/todobg-dark.png"),
+		linear-gradient(var(--todo_bg), var(--todo_bg));
 	background-position:
 		top center,
-		top center;
+		left 30px;
 	background-repeat: no-repeat;
 	background-size:
 		100% auto,
-		100% auto;
+		100% calc(100% - 30px);
+	box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
 	color: var(--text);
 }
 
@@ -1172,6 +1182,13 @@ footer p {
 @media (max-width: 620px) {
 	.sidebar {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.filter-nav {
+		display: none;
+	}
+	.sidebar img {
+		display: none;
 	}
 
 	.header {

@@ -21,9 +21,12 @@ function NotesGrid({ children }) {
 
 			if (!rowHeight || !note) return;
 
-			const rowSpan = Math.ceil(
-				(note.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap),
-			);
+			const noteStyle = window.getComputedStyle(note);
+			const noteHeight =
+				note.getBoundingClientRect().height +
+				parseFloat(noteStyle.marginTop) +
+				parseFloat(noteStyle.marginBottom);
+			const rowSpan = Math.ceil((noteHeight + rowGap) / (rowHeight + rowGap));
 
 			item.style.gridRowEnd = `span ${rowSpan}`;
 		};
