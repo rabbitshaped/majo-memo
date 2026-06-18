@@ -64,8 +64,8 @@ Majo Memo combines simple note-taking with magical-themed memo pads, to-do lists
 This project started from Angela Yu's note-taking tutorial "Keeper" and gradually evolved into a fully customized application.
 
 ## Screenshots
-
-<img width="500" alt="screencapture-localhost-5173-2026-06-12-15_37_41" src="https://github.com/user-attachments/assets/da8f3902-d7fe-4799-85d4-56af88d53cc9" />
+<img width="500" alt="screencapture-localhost-5173-2026-06-18-11_55_38" src="https://github.com/user-attachments/assets/5085d968-cfcf-40e3-b853-669a3223d549" />
+<img width="500" alt="screencapture-localhost-5173-2026-06-18-11_55_50" src="https://github.com/user-attachments/assets/3f08179f-0ec4-4890-9a2d-1a7ae1995692" />
 
 
 ---
